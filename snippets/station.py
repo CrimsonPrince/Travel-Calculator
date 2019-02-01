@@ -21,4 +21,7 @@ class BikeStation(Station):
 		self.availableStands = availableStands
 
 	def __str__(self):
-		return str(self)
+		return self.status
+
+	def __repr__(self):
+		return self.name + self.address + str(self.lat + self.lng) + self.status + str(self.lastUpdate) + str(self.numBikes + self.numStands + self.availableStands)
