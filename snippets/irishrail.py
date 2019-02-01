@@ -5,7 +5,7 @@ import pandas as pd
 import untangle
 
 
-API_BASE = "http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=D"
+API_BASE = "http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML"
 
 #https://api.jcdecaux.com/vls/v1/stations?contract={contract_name}&apiKey={api_key}
 
@@ -19,6 +19,7 @@ def main():
 	for train in xml.ArrayOfObjStation.children:
 		station_name = train.StationDesc.cdata
 		print(station_name)
+		print(train.StationDesc.cdata)
 
 	#parsed = ET.fromstring(r.content)
 
