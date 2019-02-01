@@ -24,7 +24,4 @@ def main():
 
 		list.append(tmpStation)
 
-	for station in list:
-		pprint(station)
-
 main()

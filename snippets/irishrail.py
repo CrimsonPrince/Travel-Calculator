@@ -3,6 +3,7 @@ from pprint import pprint
 import xml.etree.ElementTree as ET
 import pandas as pd
 import untangle
+from station import Station
 
 
 API_BASE = "http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML"
@@ -14,13 +15,13 @@ def main():
 	print(r.status_code)
 
 
-
+	list = []
 	xml = untangle.parse(API_BASE)
 	for train in xml.ArrayOfObjStation.children:
-		station_name = train.StationDesc.cdata
-		print(station_name)
-		print(train.StationDesc.cdata)
+		tmpStation = Station(train.StationDesc.cdata, train.StationLatitude.cdata, train.StationLongitude.cdata)
+		list.append(tmpStation)
 
+	pprint(list)
 	#parsed = ET.fromstring(r.content)
 
 	#print(parsed.tag)
