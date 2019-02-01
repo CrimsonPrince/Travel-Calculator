@@ -8,6 +8,9 @@ class Station:
 	def getLocation(self):
 		return self.lat + self.lng
 
+	def __repr__(self):
+		return "Name: " + self.name + " Location " + str(" Lat " + self.lat + " Lng " + self.lng)
+
 
 class BikeStation(Station):
 
