@@ -8,6 +8,8 @@ from display.StationRetrieve import StationRetrieve
 def index(request):
 	bike = StationRetrieve()
 	list = bike.bikeRetrieve()
-	print(list)
+	context = {
+	"bikes": list
+	}
 
-	return HttpResponse("HelloWorld")
+	return render(request, "index.html", context)
