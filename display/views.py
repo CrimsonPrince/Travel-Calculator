@@ -6,10 +6,12 @@ from display.StationRetrieve import StationRetrieve
 
 # Create your views here.
 def index(request):
-	bike = StationRetrieve()
-	list = bike.bikeRetrieve()
+	stations = StationRetrieve()
+	bikes = stations.bikeRetrieve()
+	rail = stations.railRetrieve()
 	context = {
-	"bikes": list
+	"bikes": bikes,
+	"rail" : rail
 	}
 
 	return render(request, "index.html", context)

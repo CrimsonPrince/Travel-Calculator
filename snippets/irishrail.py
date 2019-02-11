@@ -1,7 +1,5 @@
 import requests
 from pprint import pprint
-import xml.etree.ElementTree as ET
-import pandas as pd
 import untangle
 from station import Station
 
