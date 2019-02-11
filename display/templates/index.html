@@ -1,16 +1,81 @@
 <html>
 
 <head>
-	<title> Bikes </title>
+  <title> Bikes </title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+  integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+  crossorigin=""></script>
+
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <head>
 
 <body>
-	<h1> Bikes </h1>
-	<ul>
-			{% for bike in bikes %}
-				<li> {{bike.address}} </li>
-			{% endfor %}
-	</ul>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="d-flex flex-grow-1">
+          <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
+          <a class="navbar-brand d-none d-lg-inline-block" href="#">
+              Ireland's Transport
+          </a>
+          <a class="navbar-brand-two mx-auto d-lg-none d-inline-block" href="#">
+              <img src="//placehold.it/40?text=LOGO" alt="logo">
+          </a>
+          <div class="w-100 text-right">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+          </div>
+      </div>
+      <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar">
+          <ul class="navbar-nav ml-auto flex-nowrap">
+              <li class="nav-item">
+                  <a href="#" class="nav-link m-2 menu-item nav-active">Map</a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link m-2 menu-item">Dublin Bikes</a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link m-2 menu-item">Irish Rail</a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link m-2 menu-item">Dublin Bus</a>
+              </li>
+          </ul>
+      </div>
+  </nav>
+
+
+   <div id="map" style="height:100%;width:100%;">
+   </div>
+
+<script>
+var map = L.map('map').setView([53.3450,-6.2591], 14);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+</script>
+
+<script>
+{% for bike in bikes %}
+L.marker([{{bike.lat}},{{bike.lng}}]).addTo(map).bindPopup('Name: {{bike.address}} <br> Number of Stands: {{bike.numStands}} <br> Available Bikes: {{bike.numBikes}} <br> Available Stands: {{availableStands}}').openPopup();
+{% endfor %}
+</script>
 </body>
 
 </html>
