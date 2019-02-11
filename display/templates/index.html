@@ -73,7 +73,13 @@ attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStree
 
 <script>
 {% for bike in bikes %}
-L.marker([{{bike.lat}},{{bike.lng}}]).addTo(map).bindPopup('Name: {{bike.address}} <br> Number of Stands: {{bike.numStands}} <br> Available Bikes: {{bike.numBikes}} <br> Available Stands: {{availableStands}}').openPopup();
+L.marker([{{bike.lat}},{{bike.lng}}]).addTo(map).bindPopup('{{bike.address}} <br> Number Of Bikes: {{bike.numBikes}} <br> Available Stands: {{bike.availableStands}} ').openPopup();
+{% endfor %}
+</script>
+
+<script>
+{% for station in rail %}
+L.marker([{{station.lat}},{{station.lng}}]).addTo(map).bindPopup(' {{station.name}} ').openPopup();
 {% endfor %}
 </script>
 </body>

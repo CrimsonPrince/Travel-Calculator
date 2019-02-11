@@ -1,4 +1,5 @@
 import requests
+import untangle
 from display.models import BikeStation
 
 class StationRetrieve():
@@ -21,5 +22,20 @@ class StationRetrieve():
 			i['available_bike_stands']
 			)
 			stationList.append(tmpStation)
+
+		return stationList
+
+	def railRetrieve(self):
+		API_BASE = "http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML"
+		r = requests.get(API_BASE)
+		print(r.status_code)
+
+
+		stationList = []
+		xml = untangle.parse(API_BASE)
+		for train in xml.ArrayOfObjStation.children:
+			if train.StationLatitude.cdata != 0 and train.StationLatitude.cdata != 0:
+				tmpStation = BikeStation(train.StationDesc.cdata, train.StationLatitude.cdata, train.StationLongitude.cdata)
+				stationList.append(tmpStation)
 
 		return stationList
