@@ -21,7 +21,7 @@ def main():
 		i['available_bikes'], i['bike_stands'],
 		i['available_bike_stands']
 		)
-
+		print(i['available_bike_stands'])
 		list.append(tmpStation)
 
 main()
