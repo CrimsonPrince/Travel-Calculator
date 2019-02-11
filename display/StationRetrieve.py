@@ -34,8 +34,10 @@ class StationRetrieve():
 		stationList = []
 		xml = untangle.parse(API_BASE)
 		for train in xml.ArrayOfObjStation.children:
-			if train.StationLatitude.cdata != 0 and train.StationLatitude.cdata != 0:
-				tmpStation = BikeStation(train.StationDesc.cdata, train.StationLatitude.cdata, train.StationLongitude.cdata)
-				stationList.append(tmpStation)
+			if float(train.StationLatitude.cdata) == 0:
+				continue
+			tmpStation = BikeStation(train.StationDesc.cdata, train.StationLatitude.cdata, train.StationLongitude.cdata)
+			stationList.append(tmpStation)
+			print(train.StationDesc.cdata)
 
 		return stationList
