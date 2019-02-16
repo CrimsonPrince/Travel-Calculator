@@ -38,6 +38,5 @@ class StationRetrieve():
 				continue
 			tmpStation = BikeStation(train.StationDesc.cdata, train.StationLatitude.cdata, train.StationLongitude.cdata)
 			stationList.append(tmpStation)
-			print(train.StationDesc.cdata)
 
 		return stationList
