@@ -1,6 +1,7 @@
 import requests
 import untangle
 from display.models import BikeStation
+import requests_cache
 
 class StationRetrieve():
 
@@ -22,6 +23,7 @@ class StationRetrieve():
 			i['available_bike_stands']
 			)
 			stationList.append(tmpStation)
+		
 
 		return stationList
 
@@ -40,3 +42,5 @@ class StationRetrieve():
 			stationList.append(tmpStation)
 
 		return stationList
+
+	requests_cache.install_cache(cache_name='github_cache', backend='sqlite', expire_after=1200)
